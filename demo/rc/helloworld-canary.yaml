@@ -1,0 +1,35 @@
+apiVersion: v1
+kind: ReplicationController
+metadata:
+  labels:
+    app: helloworld
+    track: canary
+  name: helloworld-canary
+spec:
+  replicas: 1
+  selector:
+    app: helloworld
+    track: canary
+  template:
+    metadata:
+      labels:
+        app: helloworld
+        track: canary
+    spec:
+      containers:
+        - image: b.gcr.io/kuar/helloworld:2.0.0
+          name: helloworld
+          ports:
+            - containerPort: 80
+              protocol: TCP
+          livenessProbe:
+            httpGet:
+              path: /healthz
+              port: 80
+            initialDelaySeconds: 5
+            timeoutSeconds: 5
+        - image: redis:2.8.22
+          name: redis
+          ports:
+            - containerPort: 6379
+              protocol: TCP

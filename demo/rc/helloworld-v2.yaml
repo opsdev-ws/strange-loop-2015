@@ -1,0 +1,38 @@
+apiVersion: v1
+kind: ReplicationController
+metadata:
+  labels:
+    app: helloworld
+    track: stable
+    version: v2
+  name: helloworld-v2
+spec:
+  replicas: 5
+  selector:
+    app: helloworld
+    track: stable
+    version: v2
+  template:
+    metadata:
+      labels:
+        app: helloworld
+        track: stable
+        version: v2
+    spec:
+      containers:
+        - image: b.gcr.io/kuar/helloworld:2.0.0
+          name: helloworld
+          ports:
+            - containerPort: 80
+              protocol: TCP
+          livenessProbe:
+            httpGet:
+              path: /healthz
+              port: 80
+            initialDelaySeconds: 5
+            timeoutSeconds: 5
+        - image: redis:2.8.22
+          name: redis
+          ports:
+            - containerPort: 6379
+              protocol: TCP

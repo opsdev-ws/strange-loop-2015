@@ -1,0 +1,4 @@
+#!/bin/bash
+
+kubectl delete rc helloworld-canary helloworld-v1 helloworld-v2
+kubectl delete svc helloworld-canary helloworld

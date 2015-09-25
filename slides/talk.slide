@@ -1,0 +1,77 @@
+Managing Containers at Scale with CoreOS and Kubernetes
+Strange Loop 2015
+
+Kelsey Hightower
+CoreOS
+kelsey.hightower@coreos.com
+@kelseyhightower
+
+* How would you design your infrastructure if you could never login?
+
+* Containers
+
+Unix processes not lightweight Virtual Machines
+
+- application + dependencies = image
+- Runtime environment (cgroups, namespaces, env vars)
+
+.image images/container.png
+
+* Kubernetes
+
+* Nodes
+
+Provides compute and storage resources to the cluster.
+
+- docker
+- Kubernetes agents (kubelet, proxy)
+
+.image images/kubernetes-nodes-2.png
+
+* Pods
+
+Represents a logical application.
+
+- One or more containers
+- Shared namespaces
+
+.image images/pod.png
+
+* Scheduler
+
+Schedules pods to run on nodes.
+
+- Global scheduler for long running jobs
+- Best fit chosen based on pod requirements
+- Pluggable
+
+.image images/kubernetes-scheduler.png
+
+* Replication Controller
+
+Manages a replicated set of pods.
+
+- Creates pods from a template
+- Ensures desired number of pods are running
+- Online resizing 
+
+.image images/kubernetes-rc.png
+
+* Replication Controller
+
+Manages a replicated set of pods.
+
+- Creates pods from a template
+- Ensures desired number of pods are running
+- Self-healing 
+
+.image images/kubernetes-rc-reschedule.png
+
+* Services
+
+Service discovery for pods.
+
+- Virutal IP or port per service
+- Dynamic backends based on label queries 
+
+* Kubernetes Demo

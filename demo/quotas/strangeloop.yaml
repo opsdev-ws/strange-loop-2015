@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: ResourceQuota
+metadata:
+  name: strangeloop
+spec:
+  hard:
+    cpu: 12
+    memory: 48G
+    pods: 120
+    replicationcontrollers: 10
+    resourcequotas: 1
+    services: 10
